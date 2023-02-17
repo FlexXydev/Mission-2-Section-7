@@ -1,672 +1,375 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="/">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--===== CSS =====-->
 	<style>
-		/*
-! tailwindcss v3.0.24 | MIT License | https://tailwindcss.com
-*/
-
-/*
-1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
-2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
-*/
-
-*,
-::before,
-::after {
+		/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  /* 1 */
-  border-width: 0;
-  /* 2 */
-  border-style: solid;
-  /* 2 */
-  border-color: #e5e7eb;
-  /* 2 */
+  font-family: "Poppins" , sans-serif;
 }
-
-::before,
-::after {
-  --tw-content: '';
+.sidebar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background: #11101D;
+  padding: 6px 14px;
+  z-index: 99;
+  transition: all 0.5s ease;
 }
-
-/*
-1. Use a consistent sensible line-height in all browsers.
-2. Prevent adjustments of font size after orientation changes in iOS.
-3. Use a more readable tab size.
-4. Use the user's configured `sans` font-family by default.
-*/
-
-html {
-  line-height: 1.5;
-  /* 1 */
-  -webkit-text-size-adjust: 100%;
-  /* 2 */
-  -moz-tab-size: 4;
-  /* 3 */
-  -o-tab-size: 4;
-     tab-size: 4;
-  /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  /* 4 */
+.sidebar.open{
+  width: 250px;
 }
-
-/*
-1. Remove the margin in all browsers.
-2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
-*/
-
-body {
-  margin: 0;
-  /* 1 */
-  line-height: inherit;
-  /* 2 */
-}
-
-/*
-1. Add the correct height in Firefox.
-2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
-3. Ensure horizontal rules are visible by default.
-*/
-
-hr {
-  height: 0;
-  /* 1 */
-  color: inherit;
-  /* 2 */
-  border-top-width: 1px;
-  /* 3 */
-}
-
-/*
-Add the correct text decoration in Chrome, Edge, and Safari.
-*/
-
-abbr:where([title]) {
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
-}
-
-/*
-Remove the default font size and weight for headings.
-*/
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
-
-/*
-Reset links to optimize for opt-in styling instead of opt-out.
-*/
-
-a {
-  color: inherit;
-  text-decoration: inherit;
-}
-
-/*
-Add the correct font weight in Edge and Safari.
-*/
-
-b,
-strong {
-  font-weight: bolder;
-}
-
-/*
-1. Use the user's configured `mono` font family by default.
-2. Correct the odd `em` font sizing in all browsers.
-*/
-
-code,
-kbd,
-samp,
-pre {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  /* 1 */
-  font-size: 1em;
-  /* 2 */
-}
-
-/*
-Add the correct font size in all browsers.
-*/
-
-small {
-  font-size: 80%;
-}
-
-/*
-Prevent `sub` and `sup` elements from affecting the line height in all browsers.
-*/
-
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
+.sidebar .logo-details{
+  height: 60px;
+  display: flex;
+  align-items: center;
   position: relative;
-  vertical-align: baseline;
 }
-
-sub {
-  bottom: -0.25em;
+.sidebar .logo-details .icon{
+  opacity: 0;
+  transition: all 0.5s ease;
 }
-
-sup {
-  top: -0.5em;
+.sidebar .logo-details .logo_name{
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
 }
-
-/*
-1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
-2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
-3. Remove gaps between table borders by default.
-*/
-
-table {
-  text-indent: 0;
-  /* 1 */
-  border-color: inherit;
-  /* 2 */
-  border-collapse: collapse;
-  /* 3 */
-}
-
-/*
-1. Change the font styles in all browsers.
-2. Remove the margin in Firefox and Safari.
-3. Remove default padding in all browsers.
-*/
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit;
-  /* 1 */
-  font-size: 100%;
-  /* 1 */
-  line-height: inherit;
-  /* 1 */
-  color: inherit;
-  /* 1 */
-  margin: 0;
-  /* 2 */
-  padding: 0;
-  /* 3 */
-}
-
-/*
-Remove the inheritance of text transform in Edge and Firefox.
-*/
-
-button,
-select {
-  text-transform: none;
-}
-
-/*
-1. Correct the inability to style clickable types in iOS and Safari.
-2. Remove default button styles.
-*/
-
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-  -webkit-appearance: button;
-  /* 1 */
-  background-color: transparent;
-  /* 2 */
-  background-image: none;
-  /* 2 */
-}
-
-/*
-Use the modern Firefox focus style for all focusable elements.
-*/
-
-:-moz-focusring {
-  outline: auto;
-}
-
-/*
-Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
-*/
-
-:-moz-ui-invalid {
-  box-shadow: none;
-}
-
-/*
-Add the correct vertical alignment in Chrome and Firefox.
-*/
-
-progress {
-  vertical-align: baseline;
-}
-
-/*
-Correct the cursor style of increment and decrement buttons in Safari.
-*/
-
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
-  height: auto;
-}
-
-/*
-1. Correct the odd appearance in Chrome and Safari.
-2. Correct the outline style in Safari.
-*/
-
-[type='search'] {
-  -webkit-appearance: textfield;
-  /* 1 */
-  outline-offset: -2px;
-  /* 2 */
-}
-
-/*
-Remove the inner padding in Chrome and Safari on macOS.
-*/
-
-::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-/*
-1. Correct the inability to style clickable types in iOS and Safari.
-2. Change font properties to `inherit` in Safari.
-*/
-
-::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  /* 1 */
-  font: inherit;
-  /* 2 */
-}
-
-/*
-Add the correct display in Chrome and Safari.
-*/
-
-summary {
-  display: list-item;
-}
-
-/*
-Removes the default spacing and border for appropriate elements.
-*/
-
-blockquote,
-dl,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-figure,
-p,
-pre {
-  margin: 0;
-}
-
-fieldset {
-  margin: 0;
-  padding: 0;
-}
-
-legend {
-  padding: 0;
-}
-
-ol,
-ul,
-menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/*
-Prevent resizing textareas horizontally by default.
-*/
-
-textarea {
-  resize: vertical;
-}
-
-/*
-1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
-2. Set the default placeholder color to the user's configured gray 400 color.
-*/
-
-input::-moz-placeholder, textarea::-moz-placeholder {
+.sidebar.open .logo-details .icon,
+.sidebar.open .logo-details .logo_name{
   opacity: 1;
-  /* 1 */
-  color: #9ca3af;
-  /* 2 */
 }
-
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  opacity: 1;
-  /* 1 */
-  color: #9ca3af;
-  /* 2 */
-}
-
-input::placeholder,
-textarea::placeholder {
-  opacity: 1;
-  /* 1 */
-  color: #9ca3af;
-  /* 2 */
-}
-
-/*
-Set the default cursor for buttons.
-*/
-
-button,
-[role="button"] {
+.sidebar .logo-details #btn{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
   cursor: pointer;
+  transition: all 0.5s ease;
 }
-
-/*
-Make sure disabled buttons don't get the pointer cursor.
-*/
-
-:disabled {
-  cursor: default;
+.sidebar.open .logo-details #btn{
+  text-align: right;
 }
-
-/*
-1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
-2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
-   This can trigger a poorly considered lint error in some tools but is included by design.
-*/
-
-img,
-svg,
-video,
-canvas,
-audio,
-iframe,
-embed,
-object {
-  display: block;
-  /* 1 */
-  vertical-align: middle;
-  /* 2 */
+.sidebar i{
+  color: #fff;
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
 }
-
-/*
-Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
-*/
-
-img,
-video {
-  max-width: 100%;
-  height: auto;
+.sidebar .nav-list{
+  margin-top: 20px;
+  height: 100%;
 }
-
-/*
-Ensure the default browser behavior of the `hidden` attribute.
-*/
-
-[hidden] {
+.sidebar li{
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+.sidebar li .tooltip{
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+.sidebar li:hover .tooltip{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebar.open li .tooltip{
   display: none;
 }
-
-*, ::before, ::after {
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
+.sidebar input{
+  font-size: 15px;
+  color: #FFF;
+  font-weight: 400;
+  outline: none;
+  height: 50px;
+  width: 100%;
+  width: 50px;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background: #1d1b31;
 }
-
-.mt-3 {
-  margin-top: 0.75rem;
+.sidebar.open input{
+  padding: 0 20px 0 50px;
+  width: 100%;
 }
-
-.mr-5 {
-  margin-right: 1.25rem;
+.sidebar .bx-search{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  background: #1d1b31;
+  color: #FFF;
 }
-
-.mr-3 {
-  margin-right: 0.75rem;
+.sidebar.open .bx-search:hover{
+  background: #1d1b31;
+  color: #FFF;
 }
-
-.mt-5 {
-  margin-top: 1.25rem;
+.sidebar .bx-search:hover{
+  background: #FFF;
+  color: #11101d;
 }
-
-.flex {
+.sidebar li a{
   display: flex;
-}
-
-.contents {
-  display: contents;
-}
-
-.h-screen {
-  height: 100vh;
-}
-
-.h-16 {
-  height: 4rem;
-}
-
-.h-12 {
-  height: 3rem;
-}
-
-.w-16 {
-  width: 4rem;
-}
-
-.w-12 {
-  width: 3rem;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.items-center {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
   align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: #11101D;
 }
-
-.justify-center {
-  justify-content: center;
+.sidebar li a:hover{
+  background: #FFF;
 }
-
-.space-x-4 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1rem * var(--tw-space-x-reverse));
-  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+.sidebar li a .links_name{
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
 }
-
-.space-x-5 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1.25rem * var(--tw-space-x-reverse));
-  margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
+.sidebar.open li a .links_name{
+  opacity: 1;
+  pointer-events: auto;
 }
-
-.space-x-10 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(2.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i{
+  transition: all 0.5s ease;
+  color: #11101D;
 }
-
-.rounded-md {
-  border-radius: 0.375rem;
+.sidebar li i{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
 }
-
-.rounded-full {
-  border-radius: 9999px;
+.sidebar li.profile{
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+  overflow: hidden;
 }
-
-.bg-discord-gray {
-  --tw-bg-opacity: 1;
-  background-color: rgb(54 57 62 / var(--tw-bg-opacity));
+.sidebar.open li.profile{
+  width: 250px;
 }
-
-.bg-discord-blue {
-  --tw-bg-opacity: 1;
-  background-color: rgb(114 137 218 / var(--tw-bg-opacity));
+.sidebar li .profile-details{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
 }
-
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+.sidebar li img{
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
 }
-
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+.sidebar li.profile .name,
+.sidebar li.profile .job{
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
 }
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+.sidebar li.profile .job{
+  font-size: 12px;
 }
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.sidebar .profile #log_out{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #1d1b31;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
 }
-
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+.sidebar.open .profile #log_out{
+  width: 50px;
+  background: none;
 }
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+.home-section{
+  position: relative;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+  background-color: #27253f;
 }
-
-.font-bold {
-  font-weight: 700;
+.sidebar.open ~ .home-section{
+  left: 250px;
+  width: calc(100% - 250px);
 }
-
-.font-medium {
+.home-section .text{
+  display: inline-block;
+  color: #FFF;
+  font-size: 25px;
   font-weight: 500;
+  margin: 18px
 }
+@media (max-width: 420px) {
+  .sidebar li .tooltip{
+    display: none;
+  }
+}
+	  </style>
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
+	  <!--===== Boxicons =====-->
+	  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.transition {
-  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.duration-75 {
-  transition-duration: 75ms;
-}
-
-.hover\:bg-gray-600:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
-}
-	</style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<title>Section 7 | Dashboard</title>
 </head>
 <body>
-    <div class="flex items-center justify-center h-screen bg-discord-gray text-white flex-col">
-        <div class="text-2xl">Welcome to the dashboard,</div>
-        <div class="text-4xl mt-3 flex items-center font-medium" >
-            <img src='' id="avatar" class="rounded-full w-12 h-12 mr-3"/>
-            <div id="name"></div>
-        </div>
-        <a href="/" class="text-sm mt-5">Logout</a>
-    </div>
+	<section class="home-section">
+		<div class="text">Dashboard</div>
+	<div class="sidebar">
+	  <div class="logo-details">
+		  <div class="logo_name">Section 7</div>
+		  <i class='bx bx-menu' id="btn" ></i>
+	  </div>
+	  <ul class="nav-list">
+		<li>
+		  <a href="#">
+			<i class='bx bx-grid-alt'></i>
+			<span class="links_name">Dashboard</span>
+		  </a>
+		   <span class="tooltip">Dashboard</span>
+		</li>
+		<li>
+		 <a href="#">
+		   <i class='bx bx-user' ></i>
+		   <span class="links_name">User</span>
+		 </a>
+		 <span class="tooltip">User</span>
+	   </li>
+	   <li>
+		 <a href="#">
+		   <i class='bx bx-folder' ></i>
+		   <span class="links_name">File Manager</span>
+		 </a>
+		 <span class="tooltip">Files</span>
+	   </li>
+	   <li>
+		 <a href="#">
+		   <i class='bx bx-heart' ></i>
+		   <span class="links_name">Saved</span>
+		 </a>
+		 <span class="tooltip">Saved</span>
+	   </li>
+	   <li>
+		 <a href="https://chat.openai.com/">
+		   <i class='bx bx-bot' ></i>
+		   <span class="links_name">ChatGPT</span>
+		 </a>
+		 <span class="tooltip">AskGPT3</span>
+	   </li>
+	   <li class="profile">
+		   <div class="profile-details">
+			 <img id="avatar">
+			 <div class="name_job">
+			   <div id="name" class="name"></div>
+			 </div>
+		   </div>
+		   <a href="/"><i class='bx bx-log-out' id="log_out" ></i></a>
+	   </li>
+	  </ul>
+	</div>
+	</section>
+	<script>
+		window.onload = () => {
+		  const fragment = new URLSearchParams(window.location.hash.slice(1));
+		  const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+	  
+		  if (!accessToken) {
+			  window.location.href('/')
+		  }
+	  
+		  fetch('https://discord.com/api/users/@me', {
+		  headers: {
+			  authorization: `${tokenType} ${accessToken}`,
+		  },
+		  })
+		  .then(result => result.json())
+		  .then(response => {
+			  console.log(response);
+			  const { username, discriminator, avatar, id} = response;
+			  //set the welcome username string
+			  document.getElementById('name').innerText = ` ${username}#${discriminator}`;
+	  
+			  //set the avatar image by constructing a url to access discord's cdn
+			  document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.jpg`;
+		  })
+		  .catch(console.error);
+	  };
 
-<script>
-  window.onload = () => {
-    const fragment = new URLSearchParams(window.location.hash.slice(1));
-    const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+	  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
 
-    if (!accessToken) {
-        window.location.href('/')
-    }
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
 
-    fetch('https://discord.com/api/users/@me', {
-    headers: {
-        authorization: `${tokenType} ${accessToken}`,
-    },
-    })
-    .then(result => result.json())
-    .then(response => {
-        console.log(response);
-        const { username, discriminator, avatar, id} = response;
-        //set the welcome username string
-        document.getElementById('name').innerText = ` ${username}#${discriminator}`;
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
 
-        //set the avatar image by constructing a url to access discord's cdn
-        document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.jpg`;
-    })
-    .catch(console.error);
-
-
-};
-</script>
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+	  </script>
 </body>
 </html>
