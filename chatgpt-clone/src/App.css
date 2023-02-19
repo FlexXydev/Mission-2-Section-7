@@ -1,0 +1,150 @@
+.App {
+  text-align: center;
+  display: flex;
+  background-color: rgba(52, 53, 65, 1);
+  color: white;
+  position: absolute;
+  top: 0;bottom: 0;right: 0;left: 0;
+}
+
+.sidemenu {
+  width: 260px;
+  padding: 10px;
+  background-color: #202123;
+}
+
+.side-menu-button {
+  padding: 12px;
+  border: 1px solid hsla(0,0%,100%,.2);;
+  border-radius: 5px;
+  text-align: left;
+  transition: ease 0.25s all;
+}
+
+.side-menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.side-menu-button span {
+  padding-left: 6px;
+  padding-right: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.chatbox {
+  flex: 1;
+  background-color: #343541;
+  position: relative;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.chat-input-holder {
+  padding: 24px;
+  position: absolute;
+  bottom: 0;
+  left: 0;right: 0;
+}
+
+.chat-input-textarea {
+  background-color: #40414f;
+  width: 90%;
+  padding: 12px;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2em;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.chat-log {
+  text-align: left;
+}
+
+.chat-message.chatgpt {
+  background-color: #444654;
+  border: 0.8px #2a2b32;
+}
+
+.chat-message-center {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  padding: 12px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.avatar {
+  border-radius: 5%;
+  width: 41px;
+  height: 41px;
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.h-6 w-6{
+  background: #0da37f;
+  background-size: cover;
+  border-radius: 5%;
+  width: 40px;
+  height: 40px;
+}
+
+.message {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .sidemenu {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .chat-input-holder {
+    padding: 12px;
+  }
+  .chat-input-textarea {
+    font-size: 1em;
+  }
+  .side-menu-button {
+    padding: 8px;
+    font-size: 0.8em;
+  }
+  .message {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .avatar {
+    width: 30px;
+    height: 30px;
+  }
+  .h-6 w-6 {
+    width: 30px;
+    height: 30px;
+  }
+}
+
